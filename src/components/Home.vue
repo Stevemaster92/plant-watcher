@@ -30,7 +30,7 @@ export default {
         };
     },
     mounted() {
-        fetch("http://localhost:8000/api/v1/stations").then(async (res) => {
+        fetch(`${import.meta.env.VITE_API_URL}/stations`).then(async (res) => {
             this.stations = await res.json();
         });
     },

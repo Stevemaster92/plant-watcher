@@ -47,17 +47,11 @@ export default {
                                 data: latestSensors.map(
                                     (sensor) => sensor.moisture
                                 ),
-                                fill: true,
+                                tension: 0.1,
                             },
                         ],
                     },
                     options: {
-                        elements: {
-                            point: {
-                                radius: 0,
-                                borderWidth: 0,
-                            },
-                        },
                         scales: {
                             y: {
                                 min: 0,
