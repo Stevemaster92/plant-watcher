@@ -1,5 +1,5 @@
 <template>
-    <div class="border-2 border-gray-200 rounded-md p-4">
+    <div class="border-2 border-gray-200 rounded-md p-5">
         <h2 class="font-bold text-2xl mb-2">Station {{ station.stationId }}</h2>
 
         <div v-for="(sensor, index) in sensorData" :key="index">
