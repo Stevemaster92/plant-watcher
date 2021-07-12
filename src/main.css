@@ -9,8 +9,24 @@ body {
     font-family: "Nunito", sans-serif;
 }
 
+html {
+    @apply bg-gray-50;
+}
+
 #app {
     font-family: "Nunito", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.custom-select {
+    @apply rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50;
+}
+
+.btn-action {
+    @apply rounded px-4 py-2 text-white;
+}
+
+.station-subtitle {
+    @apply uppercase mb-4 pb-1 border-b-2 border-indigo-500 inline-block;
 }

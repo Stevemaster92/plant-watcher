@@ -1,6 +1,10 @@
 <template>
-    <div class="border-2 border-gray-200 rounded-md p-5">
-        <h2 class="font-bold text-2xl mb-2">Station {{ station.stationId }}</h2>
+    <div class="ring-1 bg-white ring-gray-200 rounded-md p-5">
+        <h2 class="font-bold text-2xl text-center uppercase mb-2">
+            Station {{ station.stationId }}
+        </h2>
+
+        <Config :config="station.config" />
 
         <div v-for="(sensor, index) in sensorData" :key="index">
             <Sensor
@@ -13,10 +17,12 @@
 </template>
 
 <script>
+import Config from "./Config.vue";
 import Sensor from "./Sensor.vue";
 
 export default {
     components: {
+        Config,
         Sensor,
     },
     props: {
@@ -27,7 +33,6 @@ export default {
     },
     data() {
         return {
-            chart: Object,
             sensorData: Array,
         };
     },
