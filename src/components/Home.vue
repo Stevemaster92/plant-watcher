@@ -34,9 +34,11 @@ export default {
         };
     },
     mounted() {
-        fetch(`${import.meta.env.VITE_API_URL}/stations`).then(async (res) => {
-            this.stations = await res.json();
-        });
+        this.$axios
+            .get(`${import.meta.env.VITE_API_URL}/stations`)
+            .then(async (res) => {
+                this.stations = await res.data;
+            });
     },
 };
 </script>

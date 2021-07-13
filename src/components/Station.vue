@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import Config from "./Config.vue";
 import Sensor from "./Sensor.vue";
 import Notification from "./Notification.vue";
@@ -60,7 +59,7 @@ export default {
             const updated = this.station;
             updated.config = config;
 
-            axios
+            this.$axios
                 .post(`${this.apiUrl}/stations`, updated)
                 .then((res) => {
                     if (res.status === 200) {
@@ -80,11 +79,11 @@ export default {
             setInterval(() => {
                 this.success = false;
                 this.error = false;
-            }, 3000);
+            }, 2000);
         },
     },
     mounted() {
-        axios
+        this.$axios
             .get(`${this.apiUrl}/stations/${this.station.stationId}/sensors`)
             .then(async (res) => {
                 const sensors = await res.data;
