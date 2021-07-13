@@ -1,12 +1,16 @@
 <template>
-    <div>
-        <span class="text-gray-700 block">{{ title }}</span>
-        <select class="custom-select w-full" v-model="currentValue">
+    <label class="flex flex-wrap md:flex-nowrap items-center">
+        <span class="text-gray-700 capitalize mr-2">{{ title }}</span>
+        <select
+            :value="value"
+            @change="$emit('change-threshold', title, $event.target.value)"
+            class="custom-select w-full"
+        >
             <option v-for="v in 101" :key="v" :value="v - 1">
                 {{ v - 1 }} %
             </option>
         </select>
-    </div>
+    </label>
 </template>
 
 <script>
@@ -14,11 +18,6 @@ export default {
     props: {
         title: String,
         value: Number,
-    },
-    data() {
-        return {
-            currentValue: this.value,
-        };
     },
 };
 </script>

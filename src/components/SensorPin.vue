@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <span class="text-gray-700 mr-4">Sensor {{ sensorId }}</span>
+    <div class="flex items-center">
+        <span class="text-gray-700 mr-2">Sensor {{ sensorId }}</span>
         <select
-            @change="$emit('change-pin', sensorId, selectedPin)"
+            @change="$emit('change-pin', sensorId, $event.target.value)"
             class="custom-select"
-            v-model="selectedPin"
+            :value="pin"
         >
             <option v-for="v in sensorPinValues" :key="v" :value="v">
                 Pin {{ v }}
@@ -24,11 +24,6 @@ export default {
     props: {
         sensorId: Number,
         pin: Number,
-    },
-    data() {
-        return {
-            selectedPin: this.pin,
-        };
     },
     computed: {
         sensorPinValues() {
