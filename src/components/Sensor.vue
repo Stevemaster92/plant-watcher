@@ -1,19 +1,17 @@
 <template>
     <div>
-        <h3 class="text-xl mb-2">Sensor {{ sensorId }}</h3>
+        <h3 class="station-subtitle">Sensor {{ sensorId }}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-                <h4 class="text-lg text-center italic mb-2">
-                    Moisure of last 24 hours
-                </h4>
-                <canvas :id="'line-chart-' + sensorId"></canvas>
-            </div>
-            <div>
-                <h4 class="text-lg text-center italic mb-2">Current moisure</h4>
+                <h4 class="chart-title">Current moisure</h4>
                 <canvas
                     class="max-h-96"
                     :id="'doughnut-chart-' + sensorId"
                 ></canvas>
+            </div>
+            <div>
+                <h4 class="chart-title">Moisure of last 24 hours</h4>
+                <canvas :id="'line-chart-' + sensorId"></canvas>
             </div>
         </div>
     </div>
@@ -36,16 +34,16 @@ export default {
         },
         getMoistureColor(moisture) {
             if (moisture > 80) {
-                return "rgba(39, 174, 96, 1)";
+                return "rgba(39, 174, 96, 1)"; // Green
             }
             if (moisture > 50) {
-                return "rgba(45, 156, 219, 1)";
+                return "rgba(45, 156, 219, 1)"; // Blue
             }
             if (moisture > 20) {
-                return "rgba(242, 201, 76, 1)";
+                return "rgba(242, 201, 76, 1)"; // Yellow
             }
 
-            return "rgba(235, 87, 87, 1)";
+            return "rgba(235, 87, 87, 1)"; // Red
         },
         fillData() {
             // Get sensor data of the last 24 hours.
@@ -142,4 +140,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.chart-title {
+    @apply text-lg text-center italic mb-2;
+}
+</style>
