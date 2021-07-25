@@ -1,6 +1,6 @@
 <template>
     <div class="mb-10">
-        <h3 class="station-subtitle">Configuration</h3>
+        <h3 class="custom-subtitle">Configuration</h3>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-x-10 gap-y-6 mb-4">
             <label class="col-span-4 md:col-span-1">
                 <p class="font-bold mb-2">Measure interval</p>
@@ -30,7 +30,7 @@
             <div class="col-span-4 mb-4">
                 <div class="font-bold mb-2">
                     Sensor pins
-                    <button @click="addSensor" class="btn-action bg-green-500 hover:bg-green-600 ml-4">+</button>
+                    <button @click="addSensor" class="custom-btn bg-green-500 hover:bg-green-600 ml-4">+</button>
                 </div>
                 <div class="grid grid-rows-1 md:grid-rows-6 lg:grid-rows-4 md:grid-flow-col gap-2">
                     <SensorPin
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <button @click="$emit('save-config', updatedConfig)" class="btn-action bg-indigo-500 hover:bg-indigo-600">
+        <button @click="$emit('save-config', updatedConfig)" class="custom-btn bg-indigo-500 hover:bg-indigo-600">
             Save Configuration
         </button>
     </div>

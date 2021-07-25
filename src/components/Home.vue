@@ -3,24 +3,28 @@
         <div class="py-4 px-2 bg-indigo-500 text-white flex">
             <SunIcon class="h-8 w-8 md:h-10 md:w-10 text-white mr-4 flex-none" />
             <h1 class="text-3xl md:text-4xl flex-auto mr-4">PlantWatcher Dashboard</h1>
-            <button v-if="!isLoggedIn" @click="login" class="btn-login flex-initial mr-4">Login</button>
+            <button v-if="!isLoggedIn" @click="showLoginModal" class="btn-login flex-initial mr-4">Login</button>
             <button v-else @click="logout" class="btn-login flex-initial mr-4">Logout</button>
         </div>
 
         <div class="flex-none justify-center m-5 lg:m-10">
             <Station v-for="station in stations" :key="station.stationId" :station="station" />
         </div>
+
+        <LoginModal @loggedIn="checkLogin" />
     </div>
 </template>
 
 <script>
 import { SunIcon } from "@heroicons/vue/solid";
 import Station from "./Station.vue";
+import LoginModal from "./LoginModal.vue";
 
 export default {
     components: {
         SunIcon,
         Station,
+        LoginModal,
     },
     data() {
         return {
@@ -41,22 +45,15 @@ export default {
         }
     },
     methods: {
-        async login() {
-            try {
-                // Login to Firebase.
-                const res = await this.$axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, {
-                    email: "pw123@example.com",
-                    password: "plantwatcher",
-                });
-                await this.$auth.signInWithCustomToken(res.data.token);
-
-                // Grab ID token and verify it.
-                const idToken = await this.$auth.currentUser.getIdToken(true);
-                await this.$axios.get(`${import.meta.env.VITE_API_URL}/auth/verify/${idToken}`);
-                console.log("Logged in successfully");
-            } catch (err) {
-                console.error("Failed to login or verify user:", err.response.data.message);
+        showLoginModal() {
+            this.$vfm.show("login-modal");
+        },
+        checkLogin(err) {
+            if (err) {
+                console.error("Failed to login or verify user");
                 this.logout();
+            } else {
+                console.log("Logged in successfully");
             }
         },
         async logout() {

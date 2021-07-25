@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3 class="station-subtitle">Sensor {{ sensorId }}</h3>
+        <h3 class="custom-subtitle">Sensor {{ sensorId }}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
                 <h4 class="chart-title">Current moisure</h4>

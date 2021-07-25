@@ -1,12 +1,9 @@
 import { createApp } from "vue";
+import VueFinalModal from "vue-final-modal";
 import axios from "axios";
 import "./main.css";
 
-// Firebase App (the core Firebase SDK) is always required and
-// must be listed before other Firebase SDKs
 import firebase from "firebase/app";
-
-// Add the Firebase services that you want to use
 import "firebase/auth";
 
 const projectId = import.meta.env.VITE_FIREBASE_PROJECT_ID;
@@ -26,4 +23,6 @@ const app = createApp(App);
 app.config.globalProperties.$axios = axios;
 app.config.globalProperties.$firebase = firebase;
 app.config.globalProperties.$auth = firebase.auth();
+app.use(VueFinalModal());
+
 app.mount("#app");

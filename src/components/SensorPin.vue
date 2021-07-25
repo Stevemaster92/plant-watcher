@@ -4,7 +4,7 @@
         <select @change="$emit('change-pin', sensorId, $event.target.value)" class="custom-select" :value="pin">
             <option v-for="v in sensorPinValues" :key="v" :value="v">Pin {{ v }}</option>
         </select>
-        <button @click="$emit('delete-sensor', sensorId)" class="btn-action bg-red-500 hover:bg-red-600 ml-4">-</button>
+        <button @click="$emit('delete-sensor', sensorId)" class="custom-btn bg-red-500 hover:bg-red-600 ml-4">-</button>
     </div>
 </template>
 

@@ -13,7 +13,7 @@
             type="error"
         />
 
-        <h2 class="station-title">Station {{ station.stationId }}</h2>
+        <h2 class="custom-title">Station {{ station.stationId }}</h2>
 
         <Config v-if="isLoggedIn" @save-config="saveConfig" :config="station.config" />
 
