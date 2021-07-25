@@ -9,10 +9,7 @@
         class="flex items-center border-l-4 py-2 px-3 shadow-md mb-2"
     >
         <!-- icons -->
-        <div
-            :class="{ 'text-green-500': isSuccess, 'text-red-500': isError }"
-            class="rounded-full bg-white mr-3"
-        >
+        <div :class="{ 'text-green-500': isSuccess, 'text-red-500': isError }" class="rounded-full bg-white mr-3">
             <svg
                 v-if="isSuccess"
                 width="1.8em"

@@ -4,10 +4,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
                 <h4 class="chart-title">Current moisure</h4>
-                <canvas
-                    class="max-h-96"
-                    :id="'doughnut-chart-' + sensorId"
-                ></canvas>
+                <canvas class="max-h-96" :id="'doughnut-chart-' + sensorId"></canvas>
             </div>
             <div>
                 <h4 class="chart-title">Moisure of last 24 hours</h4>
@@ -27,10 +24,7 @@ export default {
     },
     methods: {
         getLatest(num = 24) {
-            return this.sensorData.slice(
-                this.sensorData.length - num,
-                this.sensorData.length
-            );
+            return this.sensorData.slice(this.sensorData.length - num, this.sensorData.length);
         },
         getMoistureColor(moisture) {
             if (moisture > 80) {
@@ -48,27 +42,39 @@ export default {
         fillData() {
             // Get sensor data of the last 24 hours.
             const latestSensors = this.getLatest();
+            const smallOptions = {
+                indexAxis: "y",
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 100,
+                    },
+                },
+            };
+            const normalOptions = {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                    },
+                },
+            };
 
             // Line chart
             new Chart(document.getElementById(`line-chart-${this.sensorId}`), {
                 type: "line",
                 data: {
-                    labels: latestSensors.map((sensor) =>
-                        new Date(sensor.createdAt).toLocaleString()
-                    ),
+                    labels: latestSensors.map((sensor) => new Date(sensor.createdAt).toLocaleString()),
                     datasets: [
                         {
                             label: "Moisture",
                             backgroundColor: "rgba(79, 70, 229, 1)",
                             borderColor: "rgba(79, 70, 229, 1)",
-                            data: latestSensors.map(
-                                (sensor) => sensor.moisture
-                            ),
+                            data: latestSensors.map((sensor) => sensor.moisture),
                             tension: 0.1,
                             tooltip: {
                                 callbacks: {
-                                    label: (context) =>
-                                        `${context.dataset.label}: ${context.parsed.y} %`,
+                                    label: (context) => `${context.dataset.label}: ${context.parsed.y} %`,
                                 },
                             },
                         },
@@ -76,62 +82,32 @@ export default {
                 },
                 options:
                     // Change the chart to vertical on small displays.
-                    window.innerWidth <= 425
-                        ? {
-                              indexAxis: "y",
-                              scales: {
-                                  x: {
-                                      beginAtZero: true,
-                                      max: 100,
-                                  },
-                              },
-                          }
-                        : {
-                              scales: {
-                                  y: {
-                                      beginAtZero: true,
-                                      max: 100,
-                                  },
-                              },
-                          },
+                    window.innerWidth <= 425 ? smallOptions : normalOptions,
             });
 
             // Doughnut chart
             const lastSensor = latestSensors[latestSensors.length - 1];
             const moistureColor = this.getMoistureColor(lastSensor.moisture);
 
-            new Chart(
-                document.getElementById(`doughnut-chart-${this.sensorId}`),
-                {
-                    type: "doughnut",
-                    data: {
-                        labels: ["Moisure"],
-                        datasets: [
-                            {
-                                backgroundColor: [
-                                    moistureColor,
-                                    "rgba(27,31,35,.05)",
-                                ],
-                                hoverBackgroundColor: [
-                                    moistureColor,
-                                    "rgba(27,31,35,.05)",
-                                ],
-                                hoverOffset: 10,
-                                data: [
-                                    lastSensor.moisture,
-                                    100 - lastSensor.moisture,
-                                ],
-                                tooltip: {
-                                    callbacks: {
-                                        label: (context) =>
-                                            `${context.label}: ${context.parsed} %`,
-                                    },
+            new Chart(document.getElementById(`doughnut-chart-${this.sensorId}`), {
+                type: "doughnut",
+                data: {
+                    labels: ["Moisure"],
+                    datasets: [
+                        {
+                            backgroundColor: [moistureColor, "rgba(27,31,35,.05)"],
+                            hoverBackgroundColor: [moistureColor, "rgba(27,31,35,.05)"],
+                            hoverOffset: 10,
+                            data: [lastSensor.moisture, 100 - lastSensor.moisture],
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => `${context.label}: ${context.parsed} %`,
                                 },
                             },
-                        ],
-                    },
-                }
-            );
+                        },
+                    ],
+                },
+            });
         },
     },
     mounted() {

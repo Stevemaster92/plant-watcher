@@ -6,9 +6,7 @@
             @change="$emit('change-threshold', title, $event.target.value)"
             class="custom-select w-full"
         >
-            <option v-for="v in 101" :key="v" :value="v - 1">
-                {{ v - 1 }} %
-            </option>
+            <option v-for="v in 101" :key="v" :value="v - 1">{{ v - 1 }} %</option>
         </select>
     </label>
 </template>

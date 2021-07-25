@@ -13,18 +13,12 @@
             type="error"
         />
 
-        <h2 class="font-bold text-2xl text-center uppercase mb-4">
-            Station {{ station.stationId }}
-        </h2>
+        <h2 class="font-bold text-2xl text-center uppercase mb-4">Station {{ station.stationId }}</h2>
 
         <Config @save-config="saveConfig" :config="station.config" />
 
         <div v-for="(sensor, index) in sensorData" :key="index">
-            <Sensor
-                v-if="sensor"
-                :sensorId="sensor[0].sensorId"
-                :sensorData="sensor"
-            />
+            <Sensor v-if="sensor" :sensorId="sensor[0].sensorId" :sensorData="sensor" />
         </div>
     </div>
 </template>
@@ -83,21 +77,19 @@ export default {
         },
     },
     mounted() {
-        this.$axios
-            .get(`${this.apiUrl}/stations/${this.station.stationId}/sensors`)
-            .then(async (res) => {
-                const sensors = await res.data;
+        this.$axios.get(`${this.apiUrl}/stations/${this.station.stationId}/sensors`).then(async (res) => {
+            const sensors = await res.data;
 
-                // Create array of arrays of sensor data.
-                this.sensorData = sensors.reduce((prev, sensor) => {
-                    if (!prev[sensor.sensorId]) {
-                        prev[sensor.sensorId] = [];
-                    }
-                    prev[sensor.sensorId].push(sensor);
+            // Create array of arrays of sensor data.
+            this.sensorData = sensors.reduce((prev, sensor) => {
+                if (!prev[sensor.sensorId]) {
+                    prev[sensor.sensorId] = [];
+                }
+                prev[sensor.sensorId].push(sensor);
 
-                    return prev;
-                }, []);
-            });
+                return prev;
+            }, []);
+        });
     },
 };
 </script>

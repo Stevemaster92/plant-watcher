@@ -9,61 +9,30 @@
                     :value="config.measureInterval"
                     class="custom-select w-full"
                 >
-                    <option
-                        v-for="interval in measureIntervals"
-                        :key="interval.value"
-                        :value="interval.value"
-                    >
+                    <option v-for="interval in measureIntervals" :key="interval.value" :value="interval.value">
                         {{ interval.title }}
                     </option>
                 </select>
             </label>
             <div class="col-span-4 md:col-span-3 lg:col-span-2">
                 <p class="font-bold mb-2">Moisture thresholds</p>
-                <div
-                    class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4"
-                >
-                    <SelectThreshold
-                        @change-threshold="changeThreshold"
-                        title="wet"
-                        :value="config.threshold.wet"
-                    />
-                    <SelectThreshold
-                        @change-threshold="changeThreshold"
-                        title="damp"
-                        :value="config.threshold.damp"
-                    />
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+                    <SelectThreshold @change-threshold="changeThreshold" title="wet" :value="config.threshold.wet" />
+                    <SelectThreshold @change-threshold="changeThreshold" title="damp" :value="config.threshold.damp" />
                     <SelectThreshold
                         @change-threshold="changeThreshold"
                         title="normal"
                         :value="config.threshold.normal"
                     />
-                    <SelectThreshold
-                        @change-threshold="changeThreshold"
-                        title="dry"
-                        :value="config.threshold.dry"
-                    />
+                    <SelectThreshold @change-threshold="changeThreshold" title="dry" :value="config.threshold.dry" />
                 </div>
             </div>
             <div class="col-span-4 mb-4">
                 <div class="font-bold mb-2">
                     Sensor pins
-                    <button
-                        @click="addSensor"
-                        class="btn-action bg-green-500 hover:bg-green-600 ml-4"
-                    >
-                        +
-                    </button>
+                    <button @click="addSensor" class="btn-action bg-green-500 hover:bg-green-600 ml-4">+</button>
                 </div>
-                <div
-                    class="
-                        grid grid-rows-1
-                        md:grid-rows-6
-                        lg:grid-rows-4
-                        md:grid-flow-col
-                        gap-2
-                    "
-                >
+                <div class="grid grid-rows-1 md:grid-rows-6 lg:grid-rows-4 md:grid-flow-col gap-2">
                     <SensorPin
                         v-for="(pin, index) in config.sensorPins"
                         :key="index + '-' + pin"
@@ -75,10 +44,7 @@
                 </div>
             </div>
         </div>
-        <button
-            @click="$emit('save-config', updatedConfig)"
-            class="btn-action bg-indigo-500 hover:bg-indigo-600"
-        >
+        <button @click="$emit('save-config', updatedConfig)" class="btn-action bg-indigo-500 hover:bg-indigo-600">
             Save Configuration
         </button>
     </div>
