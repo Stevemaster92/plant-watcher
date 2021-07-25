@@ -15,7 +15,7 @@
 
         <h2 class="station-title">Station {{ station.stationId }}</h2>
 
-        <Config @save-config="saveConfig" :config="station.config" />
+        <Config v-if="isLoggedIn" @save-config="saveConfig" :config="station.config" />
 
         <div v-for="(sensor, index) in sensorData" :key="index">
             <Sensor v-if="sensor" :sensorId="sensor[0].sensorId" :sensorData="sensor" />
@@ -46,7 +46,27 @@ export default {
             error: false,
             sensorData: Array,
             apiUrl: import.meta.env.VITE_API_URL,
+            isLoggedIn: false,
         };
+    },
+    mounted() {
+        this.$auth.onAuthStateChanged((user) => {
+            this.isLoggedIn = user !== null;
+        });
+
+        this.$axios.get(`${this.apiUrl}/stations/${this.station.stationId}/sensors`).then(async (res) => {
+            const sensors = await res.data;
+
+            // Create array of arrays of sensor data.
+            this.sensorData = sensors.reduce((prev, sensor) => {
+                if (!prev[sensor.sensorId]) {
+                    prev[sensor.sensorId] = [];
+                }
+                prev[sensor.sensorId].push(sensor);
+
+                return prev;
+            }, []);
+        });
     },
     methods: {
         saveConfig(config) {
@@ -75,21 +95,6 @@ export default {
                 this.error = false;
             }, 2000);
         },
-    },
-    mounted() {
-        this.$axios.get(`${this.apiUrl}/stations/${this.station.stationId}/sensors`).then(async (res) => {
-            const sensors = await res.data;
-
-            // Create array of arrays of sensor data.
-            this.sensorData = sensors.reduce((prev, sensor) => {
-                if (!prev[sensor.sensorId]) {
-                    prev[sensor.sensorId] = [];
-                }
-                prev[sensor.sensorId].push(sensor);
-
-                return prev;
-            }, []);
-        });
     },
 };
 </script>

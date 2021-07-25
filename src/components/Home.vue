@@ -29,6 +29,10 @@ export default {
         };
     },
     async mounted() {
+        this.$auth.onAuthStateChanged((user) => {
+            this.isLoggedIn = user !== null;
+        });
+
         try {
             const res = await this.$axios.get(`${import.meta.env.VITE_API_URL}/stations`);
             this.stations = res.data;
@@ -49,17 +53,16 @@ export default {
                 // Grab ID token and verify it.
                 const idToken = await this.$auth.currentUser.getIdToken(true);
                 await this.$axios.get(`${import.meta.env.VITE_API_URL}/auth/verify/${idToken}`);
-                this.isLoggedIn = true;
                 console.log("Logged in successfully");
             } catch (err) {
                 console.error("Failed to login or verify user:", err.response.data.message);
+                this.logout();
             }
         },
         async logout() {
             try {
                 await this.$auth.signOut();
                 await this.$axios.post(`${import.meta.env.VITE_API_URL}/auth/logout`);
-                this.isLoggedIn = false;
                 console.log("Logged out successfully");
             } catch (err) {
                 console.error("Failed to logout:", err);
