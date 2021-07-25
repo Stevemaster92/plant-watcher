@@ -2,18 +2,18 @@
     <div class="ring-1 bg-white ring-gray-200 rounded-md p-5">
         <Notification
             :class="{ 'opacity-1': success, 'opacity-0': !success }"
-            class="fixed top-10 right-10 transition-opacity duration-500"
+            class="fixed right-10 transition-opacity duration-500"
             message="Config updated"
             type="success"
         />
         <Notification
             :class="{ 'opacity-1': error, 'opacity-0': !error }"
-            class="fixed top-10 right-10 transition-opacity duration-500"
+            class="fixed right-10 transition-opacity duration-500"
             message="Failed to update config"
             type="error"
         />
 
-        <h2 class="font-bold text-2xl text-center uppercase mb-4">Station {{ station.stationId }}</h2>
+        <h2 class="station-title">Station {{ station.stationId }}</h2>
 
         <Config @save-config="saveConfig" :config="station.config" />
 
