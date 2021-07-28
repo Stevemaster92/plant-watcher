@@ -74,7 +74,7 @@ export default {
         });
     },
     methods: {
-        saveConfig(config) {
+        saveConfig() {
             this.$axios
                 .post(`${this.apiUrl}/stations`, this.station)
                 .then((res) => {
