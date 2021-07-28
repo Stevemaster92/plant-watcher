@@ -18,7 +18,12 @@
         <Config v-if="isLoggedIn" @save-config="saveConfig" :config="station.config" />
 
         <div v-for="(sensor, index) in sensorData" :key="index">
-            <Sensor v-if="sensor" :sensorId="sensor[0].sensorId" :sensorData="sensor" />
+            <Sensor
+                v-if="sensor"
+                :sensorId="sensor[0].sensorId"
+                :sensorData="sensor"
+                :measureInterval="station.config.measureInterval"
+            />
         </div>
     </div>
 </template>
@@ -70,11 +75,8 @@ export default {
     },
     methods: {
         saveConfig(config) {
-            const updated = this.station;
-            updated.config = config;
-
             this.$axios
-                .post(`${this.apiUrl}/stations`, updated)
+                .post(`${this.apiUrl}/stations`, this.station)
                 .then((res) => {
                     if (res.status === 200) {
                         this.success = true;
