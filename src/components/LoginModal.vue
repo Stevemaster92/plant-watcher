@@ -49,7 +49,13 @@ export default {
 
                 // Grab ID token and verify it.
                 const idToken = await this.$auth.currentUser.getIdToken(true);
-                await this.$axios.get(`${import.meta.env.VITE_API_URL}/auth/verify/${idToken}`);
+                await this.$axios.get(`${import.meta.env.VITE_API_URL}/auth/verify`, {
+                    headers: {
+                        Authorization: `Bearer ${idToken}`,
+                    },
+                });
+                this.email = "";
+                this.password = "";
                 this.close();
             } catch (err) {
                 this.errorMessage = err.response.data.message;

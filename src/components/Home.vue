@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div class="py-4 px-2 bg-indigo-500 text-white flex">
-            <SunIcon class="h-8 w-8 md:h-10 md:w-10 text-white mr-4 flex-none" />
-            <h1 class="text-3xl md:text-4xl flex-auto mr-4">PlantWatcher Dashboard</h1>
+        <div class="py-4 px-2 bg-indigo-500 text-white flex items-center">
+            <a href="/"><SunIcon class="h-8 w-8 md:h-10 md:w-10 text-white mr-4 flex-none" /></a>
+            <h1 class="text-2xl md:text-4xl flex-auto mr-4"><a href="/">PlantWatcher Dashboard</a></h1>
             <button v-if="!isLoggedIn" @click="showLoginModal" class="btn-login flex-initial mr-4">Login</button>
             <button v-else @click="logout" class="btn-login flex-initial mr-4">Logout</button>
         </div>

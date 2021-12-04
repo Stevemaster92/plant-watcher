@@ -7,7 +7,7 @@
                 <canvas class="max-h-96" :id="'doughnut-chart-' + sensorId"></canvas>
             </div>
             <div>
-                <h4 class="chart-title">Moisure of last 24 hours</h4>
+                <h4 class="chart-title">Moisure of last {{ chartTitleValue }} hours</h4>
                 <canvas :id="'line-chart-' + sensorId"></canvas>
             </div>
         </div>
@@ -21,10 +21,15 @@ export default {
     props: {
         sensorId: Number,
         sensorData: Array,
+        measureInterval: Number, // in ms
+        measurePoints: {
+            type: Number,
+            default: 24,
+        },
     },
     methods: {
-        getLatest(num = 24) {
-            return this.sensorData.slice(this.sensorData.length - num, this.sensorData.length);
+        getLatest() {
+            return this.sensorData.slice(this.sensorData.length - this.measurePoints, this.sensorData.length);
         },
         getMoistureColor(moisture) {
             if (moisture > 80) {
@@ -112,6 +117,12 @@ export default {
     },
     mounted() {
         this.fillData();
+    },
+    computed: {
+        chartTitleValue() {
+            // Return value in hours.
+            return (this.measureInterval * this.measurePoints) / 3600000;
+        },
     },
 };
 </script>
