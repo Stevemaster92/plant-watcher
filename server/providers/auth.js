@@ -3,16 +3,16 @@ const bcrypt = require("bcrypt");
 
 function register() {
     return auth.createUser({
-        email: process.env.FIREBASE_EMAIL,
+        email: process.env.USER_EMAIL,
         emailVerified: true,
-        password: process.env.FIREBASE_PASSWORD,
+        password: process.env.USER_PASSWORD,
         displayName: "PW User",
     });
 }
 
 async function login(email, password) {
     const user = await auth.getUserByEmail(email);
-    const hashed = bcrypt.hashSync(process.env.FIREBASE_PASSWORD, 10);
+    const hashed = bcrypt.hashSync(process.env.USER_PASSWORD, 10);
 
     const match = await bcrypt.compare(password, hashed);
     if (!match) {
