@@ -3,7 +3,7 @@ import VueFinalModal from "vue-final-modal";
 import axios from "axios";
 import "./main.css";
 
-import firebase from "firebase/app";
+import * as firebase from "firebase/app";
 import "firebase/auth";
 
 const projectId = import.meta.env.VITE_FIREBASE_PROJECT_ID;

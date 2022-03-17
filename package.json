@@ -11,22 +11,22 @@
         "deploy": "firebase deploy --only hosting"
     },
     "dependencies": {
-        "axios": "^0.21.4",
-        "chart.js": "^3.4.1",
-        "firebase": "^8.10.0",
-        "vue": "^3.2.23",
+        "axios": "^0.26.1",
+        "chart.js": "^3.7.1",
+        "firebase": "^9.6.8",
+        "vue": "^3.2.31",
         "vue-final-modal": "^3.4.3"
     },
     "devDependencies": {
-        "@heroicons/vue": "^1.0.5",
+        "@heroicons/vue": "^1.0.6",
         "@tailwindcss/forms": "^0.3.4",
-        "@vitejs/plugin-vue": "^1.2.3",
-        "@vue/compiler-sfc": "^3.0.5",
-        "autoprefixer": "^10.2.6",
-        "eslint": "^7.32.0",
-        "eslint-plugin-vue": "^7.20.0",
-        "postcss": "^8.3.5",
+        "@vitejs/plugin-vue": "^2.2.4",
+        "@vue/compiler-sfc": "^3.2.31",
+        "autoprefixer": "^10.4.4",
+        "eslint": "^8.11.0",
+        "eslint-plugin-vue": "^8.5.0",
+        "postcss": "^8.4.12",
         "tailwindcss": "^2.2.4",
-        "vite": "^2.3.8"
+        "vite": "^2.8.6"
     }
 }
