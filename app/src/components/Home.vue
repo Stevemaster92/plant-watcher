@@ -1,13 +1,19 @@
 <template>
     <div>
-        <div class="py-4 px-2 bg-indigo-500 text-white flex items-center">
-            <a href="/"><SunIcon class="h-8 w-8 md:h-10 md:w-10 text-white mr-4 flex-none" /></a>
-            <h1 class="text-2xl md:text-4xl flex-auto mr-4"><a href="/">PlantWatcher Dashboard</a></h1>
-            <button v-if="!isLoggedIn" @click="showLoginModal" class="btn-login flex-initial mr-4">Login</button>
-            <button v-else @click="logout" class="btn-login flex-initial mr-4">Logout</button>
+        <div class="py-4 px-8 bg-indigo-500 text-white flex items-center space-x-4">
+            <div class="flex-initial <sm:hidden block">
+                <div class="icon-sun icon-md"></div>
+            </div>
+            <div class="flex-auto">
+                <a href="/">
+                    <h1 class="text-2xl md:text-4xl mr-4">PlantWatcher Dashboard</h1>
+                </a>
+            </div>
+            <button v-if="!isLoggedIn" @click="showLoginModal" class="btn-login flex-initial">Login</button>
+            <button v-else @click="logout" class="btn-login flex-initial">Logout</button>
         </div>
 
-        <div class="flex-none justify-center m-5 lg:m-10">
+        <div class="flex-none justify-center my-5 px-8 lg:my-10">
             <Station v-for="station in stations" :key="station.stationId" :station="station" />
         </div>
 
@@ -16,13 +22,11 @@
 </template>
 
 <script>
-import { SunIcon } from "@heroicons/vue/solid";
 import Station from "./Station.vue";
 import LoginModal from "./LoginModal.vue";
 
 export default {
     components: {
-        SunIcon,
         Station,
         LoginModal,
     },

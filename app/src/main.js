@@ -1,3 +1,5 @@
+import "virtual:windi.css";
+
 import { createApp } from "vue";
 import VueFinalModal from "vue-final-modal";
 import axios from "axios";
