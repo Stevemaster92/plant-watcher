@@ -1,9 +1,15 @@
 {
-    "name": "plant-watcher-web",
+    "name": "plant-watcher-app",
     "version": "1.0.0",
-    "description": "Web frontend of the PlantWatcher project",
+    "description": "Vue web application of the PlantWatcher project",
+    "author": "Stefan Haselwanter",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Stevemaster92/plant-watcher"
+    },
     "scripts": {
-        "dev": "vite",
+        "dev": "vite --host",
         "build": "vite build",
         "serve": "vite preview",
         "lint": "eslint .",
@@ -28,5 +34,6 @@
         "postcss": "^8.4.12",
         "tailwindcss": "^2.2.4",
         "vite": "^2.8.6"
-    }
+    },
+    "private": true
 }

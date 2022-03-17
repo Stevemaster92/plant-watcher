@@ -1,3 +1,3 @@
-# PlantWatcher Web Frontend
+# PlantWatcher
 
-The web frontend of the PlantWatcher project developed with [Vue 3](https://v3.vuejs.org/), backed by [Vite](https://vitejs.dev/), and designed using [Tailwind CSS](https://tailwindcss.com/).
+This project consists of a [web application](./app) visualizing the sensor data of my house plants retrieved from a [backend server](./server).

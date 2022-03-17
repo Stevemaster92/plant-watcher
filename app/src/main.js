@@ -3,12 +3,12 @@ import VueFinalModal from "vue-final-modal";
 import axios from "axios";
 import "./main.css";
 
-import * as firebase from "firebase/app";
-import "firebase/auth";
+// Firebase
+import { initializeApp } from "firebase/app";
+import { getAuth, signInWithCustomToken, signOut, onAuthStateChanged } from "firebase/auth";
 
 const projectId = import.meta.env.VITE_FIREBASE_PROJECT_ID;
-
-firebase.initializeApp({
+const firebaseApp = initializeApp({
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
     authDomain: `${projectId}.firebaseapp.com`,
     projectId,
@@ -16,13 +16,20 @@ firebase.initializeApp({
     messagingSenderId: import.meta.env.VITE_FIREBASE_SENDER_ID,
     appId: import.meta.env.VITE_FIREBASE_APP_ID,
 });
+const auth = getAuth(firebaseApp);
 
+// Application
 import App from "./App.vue";
 
 const app = createApp(App);
 app.config.globalProperties.$axios = axios;
-app.config.globalProperties.$firebase = firebase;
-app.config.globalProperties.$auth = firebase.auth();
+// Register authentication functions.
+app.config.globalProperties.$auth = {
+    signIn: (token) => signInWithCustomToken(auth, token),
+    signOut: () => signOut(auth),
+    onAuthStateChanged: (observer) => onAuthStateChanged(auth, observer),
+    getIdToken: (forceRefresh = false) => auth.currentUser.getIdToken(forceRefresh),
+};
 app.use(VueFinalModal());
 
 app.mount("#app");

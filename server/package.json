@@ -1,0 +1,42 @@
+{
+    "name": "plant-watcher-api",
+    "version": "1.0.0",
+    "description": "API server of the PlantWatcher project running as Cloud Functions for Firebase",
+    "author": "Stefan Haselwanter",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Stevemaster92/plant-watcher"
+    },
+    "engines": {
+        "node": "14"
+    },
+    "main": "index.js",
+    "scripts": {
+        "lint": "eslint .",
+        "serve": "firebase emulators:start --only functions",
+        "shell": "firebase functions:shell",
+        "start": "npm run shell",
+        "deploy": "firebase deploy --only functions",
+        "logs": "firebase functions:log"
+    },
+    "dependencies": {
+        "aws-sdk": "^2.1095.0",
+        "bcrypt": "^5.0.1",
+        "cookie-parser": "^1.4.6",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.0",
+        "express": "^4.17.3",
+        "express-bearer-token": "^2.4.0",
+        "firebase-admin": "^10.0.2",
+        "firebase-functions": "^3.19.0",
+        "http-errors": "^2.0.0",
+        "morgan": "^1.10.0"
+    },
+    "devDependencies": {
+        "eslint": "^8.11.0",
+        "eslint-config-google": "^0.14.0",
+        "firebase-functions-test": "^0.3.3"
+    },
+    "private": true
+}

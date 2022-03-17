@@ -45,10 +45,10 @@ export default {
                     email: this.email,
                     password: this.password,
                 });
-                await this.$auth.signInWithCustomToken(res.data.token);
+                await this.$auth.signIn(res.data.token);
 
                 // Grab ID token and verify it.
-                const idToken = await this.$auth.currentUser.getIdToken(true);
+                const idToken = await this.$auth.getIdToken(true);
                 await this.$axios.get(`${import.meta.env.VITE_API_URL}/auth/verify`, {
                     headers: {
                         Authorization: `Bearer ${idToken}`,
@@ -58,7 +58,11 @@ export default {
                 this.password = "";
                 this.close();
             } catch (err) {
-                this.errorMessage = err.response.data.message;
+                if (err.response) {
+                    this.errorMessage = err.response.data.message;
+                } else {
+                    this.errorMessage = err.message;
+                }
             }
 
             this.$emit("loggedIn", this.errorMessage);

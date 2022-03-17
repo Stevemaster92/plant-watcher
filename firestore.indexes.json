@@ -1,0 +1,13 @@
+{
+    "indexes": [
+        {
+            "collectionGroup": "SensorData",
+            "queryScope": "COLLECTION",
+            "fields": [
+                { "fieldPath": "stationId", "order": "ASCENDING" },
+                { "fieldPath": "createdAt", "order": "ASCENDING" }
+            ]
+        }
+    ],
+    "fieldOverrides": []
+}
