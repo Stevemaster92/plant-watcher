@@ -9,7 +9,7 @@
         "url": "https://github.com/Stevemaster92/plant-watcher"
     },
     "engines": {
-        "node": "14"
+        "node": "16"
     },
     "main": "index.js",
     "scripts": {
@@ -21,7 +21,6 @@
         "logs": "firebase functions:log"
     },
     "dependencies": {
-        "aws-sdk": "^2.1095.0",
         "bcrypt": "^5.0.1",
         "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",
