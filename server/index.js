@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+// Firebase
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
@@ -19,6 +20,7 @@ const logger = require("morgan");
 
 const app = express();
 
+// Middleware
 app.use(
     cors({
         origin: [
@@ -35,8 +37,9 @@ app.use(bearerToken()); // Gives access to req.token if a bearer token is presen
 app.use(express.json());
 app.use(cookieParser());
 app.use(logger("combined"));
-app.use("/auth", require("./api/auth"));
-app.use("/stations", require("./api/stations"));
+
+// Routes
+app.use("/api/v1", require("./routes"));
 app.use((err, req, res, next) => {
     if (err.statusCode && err.message) {
         res.status(err.statusCode).json({ message: err.message });
@@ -48,4 +51,4 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
 });
 
-exports.app = functions.https.onRequest(app);
+exports.server = functions.https.onRequest(app);

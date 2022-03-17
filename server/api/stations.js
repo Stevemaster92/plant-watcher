@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const httpError = require("http-errors");
-const { Stations, SensorData } = require("../providers/firestore");
+const { Stations, SensorData } = require("../services/firestore");
 
 router
     .get("/", async (req, res, next) => {

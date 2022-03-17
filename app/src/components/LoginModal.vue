@@ -12,7 +12,11 @@
         <form @submit="login" action="" class="text-center">
             <input v-model="email" type="email" class="custom-input" name="email" placeholder="Email address" />
             <input v-model="password" type="password" class="custom-input" name="password" placeholder="Password" />
-            <button :disabled="!isValidForm()" type="submit" class="custom-btn bg-indigo-500 hover:bg-indigo-600 mt-4">
+            <button
+                :disabled="!isValidForm() || loading"
+                type="submit"
+                class="custom-btn bg-indigo-500 hover:bg-indigo-600 mt-4"
+            >
                 Login
             </button>
         </form>
@@ -28,6 +32,7 @@ export default {
             email: "",
             password: "",
             errorMessage: "",
+            loading: false,
         };
     },
     methods: {
@@ -38,6 +43,7 @@ export default {
             e.preventDefault();
 
             this.errorMessage = "";
+            this.loading = true;
 
             try {
                 // Login to Firebase.
@@ -65,6 +71,7 @@ export default {
                 }
             }
 
+            this.loading = false;
             this.$emit("loggedIn", this.errorMessage);
         },
         isValidForm() {

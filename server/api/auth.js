@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const httpError = require("http-errors");
-const auth = require("../providers/auth");
+const auth = require("../services/auth");
 
 router
     .post("/register", async (req, res, next) => {
